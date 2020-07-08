@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+
+    <link href="https://fonts.googleapis.com/css2?family=Fondamento:ital@1&family=Galada&family=Hind&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>IPL SCORE PREDICTOR</title>
+
+<link href="data:image/x-icon;base64,AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAA+/v7AIk5FADt6+sA/f39APb//wD7+vwAizkaAPz//wDTiQEA////AIs6FwCOORkA///+APr8/QCDOhYA0YsCAP/7/wCJORgA/P7/AIg2FwD//v8AZIzyAJA6HAD+9/8A/v7+AO/9/wD///UA0IsAANOLAAC/hwAA/f3/AOD/8gD//f8AkDkWANCKAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKCgoCCgoKBxMHCgoLEhQKCgoKBwwKCgchBwoKBwoKCgoKCgoHBwoHCgcHBQcKCgoKCgoKBwcDBw0HCgcHCgoKCgoKCgsHCgcVBwcHBxsKCgoKCg8HHwoKCgoKCgoKCgoKChkHCgoKHBwcHAkcEBwKChUHBgQKGBwjGg4cHh0cCgoiFwoBChEcHBwcHBwcHAoKCiAKChYKCgoKCgoKCgoKCgoKCggKCgoKCgoKCgoKCgAAAAAAAAAAAAAAAAAAAAAACgoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAAn/8AAP//AAA=" rel="icon" type="image/x-icon" />
+
+<!-- Bootstrap -->
+<!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+<script src="https://kit.fontawesome.com/22cbeb89ea.js" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+  <body>
+    <div class="cotainer">
+      <div class="bg">
+         <nav>
+           <h1>First Innings Score Predictor For Indian Premier League (IPL)</h1>
+           <p>A Machine Learning Web App, Built with Flask, Deployed using Heroku</p>
+         </nav>
+
+         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel"  data-interval="5000" >
+           <div class="carousel-inner">
+             <div class="carousel-item active">
+               <img class="d-block w-100" src="/static/ipltrophy.jpg" alt="First slide">
+             </div>
+             <div class="carousel-item">
+               <img class="d-block w-100" src="/static/allcaptains.jpg" alt="Second slide">
+             </div>
+             <div class="carousel-item">
+                <img class="d-block w-100" src="/static/allteams_symb.jpg" alt="Third slide">
+             </div>
+             <div class="carousel-item">
+               <img class="d-block w-100" src="/static/mi.jpg" alt="Third slide">
+             </div>
+             <div class="carousel-item">
+               <img class="d-block w-100" src="/static/csk.jpg" alt="Third slide">
+             </div>
+             <div class="carousel-item">
+               <img class="d-block w-100" src="/static/sr.jpg" alt="Third slide">
+             </div>
+             <div class="carousel-item">
+               <img class="d-block w-100" src="/static/kkr.jpg" alt="Third slide">
+             </div>
+             <div class="carousel-item">
+               <img class="d-block w-100" src="/static/rr.jpg" alt="Third slide">
+             </div>
+           </div>
+<div class="modal_my">
+  <div class="modal_content" id="modal_content_result">
+    <!-- Result -->
+    <div class="results">
+      <p class='result-p'>The final predicted score (range): {{ lower_limit }} to {{ upper_limit }}</p>
+    </div>
+<form action="{{ url_for('homes') }}" method="POST">
+    <!-- <a href="#index.html" -->
+<button class="btn btn-dark" type="submit" value="Predict Score">PREDICT AGAIN</button>
+<!-- </a> -->
+      </div>
+    </form>
+  </div>
+
+         </div>
+
+      </div>
+      <footer>
+
+
+        <!-- <h1 style="    padding-top: 16PX;
+    PADDING-LEFT: 42px;">Developer</h1> -->
+<div class="contact">
+  <div class="tanmay">
+    <h4>Tanmay Sharma</h4>
+    <p>ML Engineer</p>
+<a href="https://github.com/tansha31" target="_blank">
+            <i class="fab fa-github-square" style="padding: 0px 25px 0px 0px;"></i></a>
+          <a href="https://www.linkedin.com/in/tanmay-sharma-75718b195/" target="_blank"><i class="fab fa-linkedin"></i></a>
+
+        </div>
+        <p id="disclaimer">© 2020 Predictor.<br> All rights reserved.</p>
+        <div class="sg">
+
+          <h4>Shreyansh Garg </h4>
+          <p>Web Developer</p>
+
+          <a href="https://github.com/ShreyanshGarg" target="_blank">
+                      <i class="fab fa-github-square" id="git" style="padding: 0px 25px 0px 0px;"></i></a>
+                    <a href="https://www.linkedin.com/in/shreyansh-garg-6479281aa/" target="_blank"><i class="fab fa-linkedin"></i></a>
+
+        </div>
+</div>
+
+
+
+
+      </footer>
+    </div>
+  </body>
+</html>

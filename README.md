@@ -6,3 +6,5 @@ Deployed at: _https://ipl-first-innings-score-pred.herokuapp.com/_
 * Please do ⭐ the repository, if it helped you in anyway.
 
 *  A glimpse of the web app:
+
+  ![mp4](readme_resources/ipl-score-prediction-webapp.gif)
